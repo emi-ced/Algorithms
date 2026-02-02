@@ -22,17 +22,17 @@
             return -1;
         }
 
-        private int BinarySearchRecursive(int startIndex, int endIndex, int target, int[] nums)
+        private int BinarySearchRecursive(int leftIndex, int rightIndex, int[] nums, int target)
         {
-            if (endIndex - startIndex <= 1)
-                return nums[startIndex] == target ? startIndex : -1;
-
-            int midIndex = startIndex + ((endIndex - startIndex) / 2);
-
+            if (leftIndex > rightIndex)
+                return -1;
+    
+            int midIndex = leftIndex + ((rightIndex - leftIndex) / 2);
+    
             if (nums[midIndex] < target)
-                return BinarySearchRecursive(midIndex, endIndex, target, nums);
+                return BinarySearchRecursive(midIndex + 1, rightIndex, nums, target);
             else if (nums[midIndex] > target)
-                return BinarySearchRecursive(startIndex, midIndex, target, nums);
+                return BinarySearchRecursive(leftIndex, midIndex - 1, nums, target);
             else
                 return midIndex;
         }
