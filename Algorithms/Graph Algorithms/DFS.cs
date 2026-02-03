@@ -39,76 +39,100 @@
             values.Add(node.val);
         }
 
-
-
-        public IList<int> IterativeDFS(TreeNode root)
+        private List<int> IterativeInOrderTraversal(TreeNode root)
         {
             List<int> result = new();
-            Stack<TreeNode> stack = new Stack<TreeNode>();
-
-            // In-order traversal.
+    
+            Stack<TreeNode> stack = new();
 
             // We have to specify 'root != null' for the following edge case: [1,null,2].
             // Stack would be empty but we still have the node '2' to process.
             while (root != null || stack.Count > 0)
             {
-                if (root == null)
-                {
-                    var tempNode = stack.Pop();
-                    result.Add(tempNode.val);
-                    root = tempNode.right;
-                }
-                else
+                if (root != null)
                 {
                     stack.Push(root);
                     root = root.left;
                 }
+                else
+                {
+                    var tempNode = stack.Pop();
+                    result.Add(tempNode.val);
+    
+                    root = tempNode.right;
+                }
             }
+    
+            return result;
+        }
 
-            // Pre-order traversal.
+        private List<int> IterativePreOrderTraversal(TreeNode root)
+        {
+            List<int> result = new();
+    
+            Stack<TreeNode> stack = new();
+    
             while (root != null || stack.Count > 0)
             {
                 if (root != null)
                 {
-                    Console.WriteLine(root.val);
+                    result.Add(root.val);
+    
                     if (root.right != null)
-                    {
                         stack.Push(root.right);
-                    }
-                    root = root.left;
+    
+                    root = root.left;        
                 }
                 else
                 {
                     root = stack.Pop();
                 }
             }
-
-            // Post-order traversal.
-            Stack<bool> visit = new Stack<bool>();
-            visit.Push(false);
-
+    
+            return result;
+        }
+        
+        private List<int> IterativePostOrderTraversal(TreeNode root)
+        {
+            List<int> result = new();
+    
+            Stack<TreeNode> stack = new();
+            Stack<bool> visited = new();
+    
+            if (root != null)
+            {
+                stack.Push(root);
+                visited.Push(false);
+            }
+    
             while (stack.Count > 0)
             {
-                TreeNode curr = stack.Pop();
-                bool visited = visit.Pop();
-                if (curr != null)
+                var node  = stack.Pop();
+                var isVisited = visited.Pop();
+    
+                if (isVisited)
                 {
-                    if (visited)
+                    result.Add(node.val);
+                }
+                else
+                {
+                    stack.Push(node);
+                    visited.Push(true);
+    
+                    if (node.right != null)
                     {
-                        Console.WriteLine(curr.val);
+                        stack.Push(node.right);
+                        visited.Push(false);
                     }
-                    else
+    
+                    if (node.left != null)
                     {
-                        stack.Push(curr);
-                        visit.Push(true);
-                        stack.Push(curr.right);
-                        visit.Push(false);
-                        stack.Push(curr.left);
-                        visit.Push(false);
+                        stack.Push(node.left);
+                        visited.Push(false);
                     }
                 }
             }
-
+    
             return result;
         }
     }
