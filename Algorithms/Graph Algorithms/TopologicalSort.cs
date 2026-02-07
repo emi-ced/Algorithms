@@ -15,20 +15,18 @@
                 adjacencyList.Add(i, new List<int>());
 
             foreach (var edge in edges)
-                adjacencyList[edge[0]].Add(edge[1]);
+                adjacencyList[edge[1]].Add(edge[0]);
 
-            HashSet<int> path = new();
             HashSet<int> visitedVertices = new();
             List<int> result = new();
 
             for (int i = 0; i < n; i++)
             {
-                var cyclePresent = DFS(i, visitedVertices, path, result, adjacencyList);
+                var cyclePresent = DFS(i, visitedVertices, new HashSet<int>(), result, adjacencyList);
+                
                 if (cyclePresent)
-                    return new List<int>();
+                    return [];
             }
-
-            result.Reverse();
 
             return result;
         }
