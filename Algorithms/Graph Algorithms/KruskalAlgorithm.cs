@@ -1,5 +1,11 @@
 ﻿namespace Algorithms.Graph_Algorithms
 {
+    // Time complexity: O(E * log E)
+    // Space complexity: O(E + V) 
+
+    // E - Edge
+    // V - Vertex (node)
+    // log V - Enqueing/Dequing nodes.
     public class KruskalAlgorithm
     {
         public int MinimumSpanningTree(int n, List<List<int>> edges)
