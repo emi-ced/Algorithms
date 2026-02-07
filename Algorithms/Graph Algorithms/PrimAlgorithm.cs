@@ -1,5 +1,13 @@
 ﻿namespace Algorithms.Graph_Algorithms
 {
+    // Time and space complexity same as Dijsktra's algorithm.
+    // Time complexity: O((E + V) * log V)
+    // Space complexity: O(E + V) 
+
+    // E - Edge
+    // V - Vertex (node)
+    // log V - Enqueing/Dequing nodes.
+
     public class PrimAlgorithm
     {
         public int MinimumSpanningTree(int n, List<List<int>> edges)
