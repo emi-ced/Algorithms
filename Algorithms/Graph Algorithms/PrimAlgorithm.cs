@@ -7,7 +7,6 @@
     // E - Edge
     // V - Vertex (node)
     // log V - Enqueing/Dequing nodes.
-
     public class PrimAlgorithm
     {
         public int MinimumSpanningTree(int n, List<List<int>> edges)
