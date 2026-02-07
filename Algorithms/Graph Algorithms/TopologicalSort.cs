@@ -1,5 +1,10 @@
 ﻿namespace Algorithms.Graph_Algorithms
 {
+    // Time complexity: O(E + V)
+    // Space complexity: O(E + V) 
+
+    // E - Edge
+    // V - Vertex (node)
     public class TopologicalSort
     {
         public List<int> TopologicalSortInternal(int n, int[][] edges)
