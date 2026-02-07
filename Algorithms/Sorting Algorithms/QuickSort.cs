@@ -13,7 +13,7 @@
         // Space: Omega(logn) - Theta(logn) - O(n)
         private void QuickSortInternal(int startIndex, int endIndex, int[] nums)
         {
-            if (endIndex - startIndex <= 1)
+            if (startIndex >= endIndex)
                 return;
 
             int pivotValue = nums[endIndex - 1];
