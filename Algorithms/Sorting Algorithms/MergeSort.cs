@@ -16,7 +16,7 @@
 
         private void MergeSortInternal(int startIndex, int endIndex, int[] nums)
         {
-            if (endIndex - startIndex <= 1)
+            if (startIndex >= endIndex)
                 return;
 
             int midIndex = startIndex + ((endIndex - startIndex) / 2);
