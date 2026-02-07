@@ -38,20 +38,19 @@
 
             while (minHeap.Count > 0)
             {
-                var node = minHeap.Dequeue();
-                (int nodeName, int nodeWeight) = node;
+                (int nodeName, int nodeWeight) = minHeap.Dequeue();
 
-                if (result[nodeName] != -1)
-                    continue;
-
-                result[nodeName] = nodeWeight;
-
-                foreach (var neighbourNode in adjacencyList[nodeName])
+                if (result[nodeName] == -1)
                 {
-                    (int neighbourName, int neighbourWeight) = neighbourNode;
+                    result[nodeName] = nodeWeight;
 
-                    if (result[neighbourName] == -1)
-                        minHeap.Enqueue((neighbourName, neighbourWeight + nodeWeight), neighbourWeight + nodeWeight);
+                    foreach (var neighbourNode in adjacencyList[nodeName])
+                    {
+                        (int neighbourName, int neighbourWeight) = neighbourNode;
+
+                        if (result[neighbourName] == -1)
+                            minHeap.Enqueue((neighbourName, neighbourWeight + nodeWeight), neighbourWeight + nodeWeight);
+                    }
                 }
             }
 
