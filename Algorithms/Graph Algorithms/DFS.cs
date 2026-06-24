@@ -68,25 +68,22 @@
 
         private List<int> IterativePreOrderTraversal(TreeNode root)
         {
-            List<int> result = new();
-    
             Stack<TreeNode> stack = new();
+            List<int> result = [];
     
-            while (root != null || stack.Count > 0)
+            if (root != null)
+                stack.Push(root);
+    
+            while (stack.Count > 0)
             {
-                if (root != null)
-                {
-                    result.Add(root.val);
+                var node = stack.Pop();
+                result.Add(node.val);
     
-                    if (root.right != null)
-                        stack.Push(root.right);
+                if (node.right != null)
+                    stack.Push(node.right);
     
-                    root = root.left;        
-                }
-                else
-                {
-                    root = stack.Pop();
-                }
+                if (node.left != null)
+                    stack.Push(node.left);
             }
     
             return result;
