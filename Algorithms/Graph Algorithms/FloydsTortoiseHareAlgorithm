@@ -2,32 +2,34 @@ namespace Algorithms.Graph_Algorithms
 {
     public class FloydsTortoiseHare
     {
-      public int FindCycle(int[] nums)
-      {
-          var slowPointer = nums[0];
-          var fastPointer = nums[0];
-  
-          while (true)
-          {
-              slowPointer = nums[slowPointer];
-              fastPointer = nums[nums[fastPointer]];
-  
-              // Found cycle.
-              if (slowPointer == fastPointer)
-                  break;
-          }
-  
-          // Find start of cycle.
-          var newSlowPointer = nums[0];
-  
-          while (newSlowPointer != slowPointer)
-          {
-              newSlowPointer = nums[newSlowPointer];
-              slowPointer = nums[slowPointer];
-          }
-  
-          return slowPointer;
-      }
+        public ListNode DetectCycle(ListNode head)
+        {
+            ListNode slowPointer = head;
+            ListNode fastPointer = head;
+    
+            while (fastPointer != null && fastPointer.next != null)
+            {
+                slowPointer = slowPointer.next;
+                fastPointer = fastPointer.next.next;
+
+                // Found cycle.
+                if (slowPointer == fastPointer)
+                {
+                    var slowPointerTwo = head;
+    
+                    while (slowPointer != slowPointerTwo)
+                    {
+                        slowPointer = slowPointer.next;
+                        slowPointerTwo = slowPointerTwo.next;
+                    }
+
+                    // Found start of cycle.
+                    return slowPointer;
+                }
+            }
+    
+            return null;
+        }
     }
 }
 
