@@ -16,7 +16,9 @@
             // If we specified '-1' instead of 'int.MaxValue' we would never get the solution.
             // 'nodeDistance[edge[0]] + edge[2] < nodeDistance[edge[1]]' would never be true becuase '-1' is always smaller.
             nodeDistance.Add(i, int.MaxValue);
-        }    
+        }
+
+        // Set start node to 0 as an entry point into the graph.
         nodeDistance[k] = 0;
 
         // Define min distance to each node.
