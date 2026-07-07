@@ -68,6 +68,9 @@
             return result;
         }
 
+        // Due to the order of the operation, we do not need the pointer.
+        // Just the stack is enough since a node should be immediately
+        // processed from the stack before moving to its children.
         private List<int> IterativePreOrderTraversal(TreeNode root)
         {
             Stack<TreeNode> stack = new();
@@ -90,7 +93,9 @@
     
             return result;
         }
-        
+
+        // Due to the order of operation, each node is processed thrice.
+        // First to add it, second to add its children and third to process it.
         private List<int> IterativePostOrderTraversal(TreeNode root)
         {
             List<int> result = new();
