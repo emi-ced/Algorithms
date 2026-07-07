@@ -74,6 +74,16 @@
             return true;
         }
 
+        public bool IsConnected()
+        {
+            int count = 0;
+
+            foreach (var entry in _parents)
+                count += (entry.Key == entry.Value) ? 1 : 0;
+    
+            return count == 1;
+        }        
+
         private int FindParent(int x)
         {
             var node = parents[x];
