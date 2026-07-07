@@ -61,16 +61,15 @@
             if (left >= right)
                 return -1;
             
-            // Random pivot index.
-            int pivotIndex = Random.Shared.Next(left, right);
+            // Swap random number to pivot position.
+            int randomIndex = Random.Shared.Next(left, right);
 
-            // Swap random pivot to the end of the array.
-            int tempPivot = nums[pivotIndex];
-            nums[pivotIndex] = nums[right - 1];
-            nums[right - 1] = tempPivot;
+            int randomIndexValue = nums[randomIndex];
+            nums[randomIndex] = nums[right];
+            nums[right] = randomIndexValue;
             
-            var pivotValue = nums[right - 1];
-            var swapIndex = left;
+            int pivotValue = nums[right];
+            int swapIndex = left;
 
             for (int i = left; i < right - 1; i++)
             {
