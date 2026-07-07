@@ -18,11 +18,12 @@
                 adjacencyList[edge[1]].Add(edge[0]);
 
             HashSet<int> visitedVertices = new();
+            HashSet<int> processedVertices = new();
             List<int> result = new();
 
             for (int i = 0; i < n; i++)
             {
-                var cyclePresent = DFS(i, visitedVertices, new HashSet<int>(), result, adjacencyList);
+                var cyclePresent = DFS(i, adjacencyList, visitedVertices, processedVertices, result);
                 
                 if (cyclePresent)
                     return [];
@@ -31,27 +32,27 @@
             return result;
         }
 
-        private bool DFS(int node, HashSet<int> visitedVertices, HashSet<int> path, List<int> result, Dictionary<int, List<int>> adjacencyList)
+        private bool DFS(int vertex, Dictionary<int, List<int>> adjacencyList, HashSet<int> visitedVertices, HashSet<int> processedVertices, List<int> result)
         {
-            if (path.Contains(node))
+            if (visitedVertices.Contains(vertex))
                 return true;
 
-            if (visitedVertices.Contains(node))
+            if (processedVertices.Contains(vertex))
                 return false;
 
-            path.Add(node);
-            visitedVertices.Add(node);
+            visitedVertices.Add(vertex);
+            processedVertices.Add(vertex);
 
-            foreach (var childVertice in adjacencyList[node])
+            foreach (var adjacentVertex in adjacencyList[vertex])
             {
-                var cyclePresent = DFS(childVertice, visitedVertices, path, result, adjacencyList);
+                var cyclePresent = DFS(adjacentVertex, adjacencyList, visitedVertices, processedVertices, result);
 
                 if (cyclePresent)
                     return true;
             }
 
-            path.Remove(node);
-            result.Add(node);
+            visitedVertices.Remove(vertex);
+            result.Add(vertex);
 
             return false;
         }
