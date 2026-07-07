@@ -45,8 +45,10 @@
     
             Stack<TreeNode> stack = new();
 
-            // We have to specify 'root != null' for the following edge case: [1,null,2].
-            // Stack would be empty but we still have the node '2' to process.
+            // Due to the way the nodes have to be accessed, we have to use the 
+            // pointer and stack to achieve in-order traversal.
+            // Once a node is popped from the stack, all of its left 
+            // children have processed, and it is its turn.
             while (root != null || stack.Count > 0)
             {
                 if (root != null)
