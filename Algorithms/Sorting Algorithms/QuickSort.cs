@@ -4,7 +4,7 @@
     {
         public int[] SortArray(int[] nums)
         {
-            QuickSortInternal(0, nums.Length, nums);
+            QuickSortInternal(0, nums.Length - 1, nums);
 
             return nums;
         }
@@ -16,36 +16,35 @@
             if (startIndex >= endIndex)
                 return;
 
-            // Random pivot index.
-            int pivotIndex = Random.Shared.Next(startIndex, endIndex);
+            // Swap random number to pivot position.
+            int randomIndex = Random.Shared.Next(startIndex, endIndex);
 
-            // Swap random pivot to the end of the array.
-            int tempPivot = nums[pivotIndex];
-            nums[pivotIndex] = nums[endIndex - 1];
-            nums[endIndex - 1] = tempPivot;
+            int randomIndexValue = nums[randomIndex];
+            nums[randomIndex] = nums[endIndex];
+            nums[endIndex] = randomIndexValue;
             
-            int pivotValue = nums[endIndex - 1];
-            int nextAvailableSlot = startIndex;
+            int pivotValue = nums[endIndex];
+            int swapIndex = startIndex;
 
-            // We can't set 'i = startIndex + 1' because we have to define the value at 'startIndex' as smaller than pivot.
-            // Otherwise the value will be moved as greater which is not always correct.
-            for (int i = startIndex; i < endIndex - 1; i++)
+            // We can't set 'i = startIndex + 1' because we have to 
+            // place all smaller values before the pivot and increment the 'swapIndex'.
+            for (int i = startIndex; i < endIndex; i++)
             {
                 if (nums[i] < pivotValue)
                 {
                     int tempValue = nums[i];
-                    nums[i] = nums[nextAvailableSlot];
-                    nums[nextAvailableSlot] = tempValue;
+                    nums[i] = nums[swapIndex];
+                    nums[swapIndex] = tempValue;
 
-                    nextAvailableSlot++;
+                    swapIndex++;
                 }
             }
 
-            nums[endIndex - 1] = nums[nextAvailableSlot];
-            nums[nextAvailableSlot] = pivotValue;
+            nums[endIndex] = nums[swapIndex];
+            nums[swapIndex] = pivotValue;
 
-            QuickSortInternal(startIndex, nextAvailableSlot, nums);
-            QuickSortInternal(nextAvailableSlot + 1, endIndex, nums);
+            QuickSortInternal(startIndex, swapIndex - 1, nums);
+            QuickSortInternal(swapIndex + 1, endIndex, nums);
         }
     }
 
